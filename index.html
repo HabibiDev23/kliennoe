@@ -66,16 +66,17 @@
             inset: 0;
             z-index: 10;
             overflow: hidden;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #opening-container.fade-out {
             opacity: 0;
+            pointer-events: none;
         }
 
         .main-section {
             opacity: 0;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .main-section.active {
@@ -100,7 +101,7 @@
             margin-bottom: 0;
             color: var(--dark-pink);
             opacity: 0;
-            animation: fadedownIn 1s ease-out 2s forwards;
+            animation: fadedownIn 1s ease-out 0.8s forwards;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -112,7 +113,7 @@
             width: clamp(20px, 5vw, 32px);
             height: clamp(20px, 5vw, 32px);
             transform: translateY(2px);
-            animation: rotate 1.5s ease-out 2s forwards;
+            animation: rotate 1.5s ease-out 0.8s forwards;
         }
 
         .opening-judul {
@@ -126,7 +127,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
-            animation: fadeupIn 1s ease-out 2s forwards;
+            animation: fadeupIn 1s ease-out 0.8s forwards;
             line-height: 1.1;
         }
 
@@ -141,7 +142,7 @@
             bottom: -10px;
             transform: translateX(-50%);
             opacity: 0;
-            animation: widthExpand 1s ease-out 2s forwards;
+            animation: widthExpand 1s ease-out 0.8s forwards;
         }
 
         .gift-1, .gift-2 {
@@ -156,13 +157,13 @@
         .gift-1 {
             left: 45%;
             transform: translateX(-50%) rotate(8deg);
-            animation: slideRotate1 1.5s ease-out 1s forwards;
+            animation: slideRotate1 1.2s ease-out 0.2s forwards;
         }
 
         .gift-2 {
             left: 55%;
             transform: translateX(-50%) rotate(-8deg);
-            animation: slideRotate2 1.5s ease-out 1s forwards;
+            animation: slideRotate2 1.2s ease-out 0.2s forwards;
         }
 
         .opening-wrappersymbol {
@@ -179,7 +180,7 @@
 
         .opening-symbol2 {
             transform: rotate(10deg);
-            animation: diagonalUp 1s ease-in-out 1.8s forwards;
+            animation: diagonalUp 1s ease-in-out 0.6s forwards;
             background: linear-gradient(45deg, var(--pink), var(--dark-pink));
             background-clip: text;
             -webkit-background-clip: text;
@@ -188,7 +189,7 @@
 
         .opening-symbol1 {
             transform: rotate(-10deg);
-            animation: diagonalDown 1s ease-in-out 1.8s forwards;
+            animation: diagonalDown 1s ease-in-out 0.6s forwards;
             background: linear-gradient(45deg, var(--pink), var(--dark-pink));
             background-clip: text;
             -webkit-background-clip: text;
@@ -202,7 +203,7 @@
             align-items: center;
             z-index: 5;
             opacity: 0;
-            animation: fadeupIn 1s ease-out 2.2s forwards;
+            animation: fadeupIn 1s ease-out 1s forwards;
         }
 
         .btn-opening {
@@ -217,21 +218,22 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(242, 22, 84, 0.35);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+            will-change: transform;
         }
 
         .btn-opening:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(242, 22, 84, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(242, 22, 84, 0.45);
         }
 
         .btn-opening:active {
-            transform: scale(0.95);
+            transform: translateY(0);
         }
 
         /* SCROLLBAR & NAV */
         ::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
@@ -260,11 +262,7 @@
             transform: translateX(-50%);
             z-index: 100;
             padding: 7px 12px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-        }
-
-        nav:hover {
-            transform: translateX(-50%) scale(1.05);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         nav.shadow-pink {
@@ -297,16 +295,17 @@
             width: 38px;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(242, 22, 84, 0.25);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+            will-change: transform;
         }
 
         nav a:hover {
-            transform: translateY(-0.5px) scale(1.02);
+            transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(242, 22, 84, 0.45);
         }
 
         nav a:active {
-            transform: scale(0.95);
+            transform: translateY(0);
         }
 
         nav a img {
@@ -365,26 +364,22 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             opacity: 0;
-            transform: translateX(0) scale(0.8);
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
+            transform: translateX(0);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, background 0.2s ease, color 0.2s ease;
             z-index: -1;
             outline: none;
+            will-change: transform, opacity;
         }
 
         .vinyl-wrapper:hover .next-btn {
             opacity: 1;
-            transform: translateX(-62px) scale(1);
+            transform: translateX(-62px);
             z-index: 10;
         }
 
         .next-btn:hover {
             background: #ffffff;
             color: #f21654;
-            transform: translateX(-62px) scale(1.1) !important;
-        }
-
-        .next-btn:active {
-            transform: translateX(-62px) scale(0.95) !important;
         }
 
         .song-toast {
@@ -398,15 +393,16 @@
             flex-direction: column;
             align-items: flex-start;
             opacity: 0;
-            transform: translateY(15px) scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            transform: translateY(12px);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
             pointer-events: none;
             white-space: nowrap;
+            will-change: transform, opacity;
         }
 
         .song-toast.show {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
         .toast-note {
@@ -687,18 +683,28 @@
             word-break: break-word;
         }
 
-        .image-1 {
+        .image-wrapper {
             width: 48%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        /* TILT SANGAT HALUS - NO SCALE - ULTRA RESPONSIVE */
+        .image-1 {
+            width: 100%;
             height: clamp(260px, 40vw, 420px);
             position: relative;
-            cursor: crosshair;
+            cursor: pointer;
             border-radius: 20px;
             border: 2px solid var(--white-pink);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            flex-shrink: 0;
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.45s ease;
+            will-change: transform;
+            touch-action: none;
         }
 
         .image-1::before {
@@ -710,12 +716,14 @@
             top: 71%;
             opacity: 0.7;
             animation: breathe 1s infinite;
+            pointer-events: none;
         }
 
         .image-1 img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            pointer-events: none;
         }
 
         /* SECOND SECTION */
@@ -774,12 +782,13 @@
             flex-direction: column;
             align-items: center;
             gap: 16px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+            will-change: transform;
         }
 
         .moment-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(126, 65, 45, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(126, 65, 45, 0.22);
         }
 
         .moment-image-wrap {
@@ -796,11 +805,6 @@
             object-fit: cover;
             object-position: top center;
             display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .moment-card:hover .moment-img {
-            transform: scale(1.03);
         }
 
         .moment-text-wrap {
@@ -1006,10 +1010,11 @@
             .cont-wrapper1 { flex-direction: column-reverse; gap: 20px; }
             .desc-1 { width: 100%; text-align: center; }
             .desc-1 .special-text1 { text-align: center; }
+            .image-wrapper { width: 100%; }
             .image-1 { width: 100%; max-width: 320px; height: 340px; }
             .first-sec .leftright-symbol { display: none; }
-            .gift-1 { animation: slideRotate1Tablet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
-            .gift-2 { animation: slideRotate2Tablet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
+            .gift-1 { animation: slideRotate1Tablet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; }
+            .gift-2 { animation: slideRotate2Tablet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; }
 
             @keyframes slideRotate1Tablet {
                 from { transform: translateX(-50%) rotate(0deg); opacity: 0; left: 50%; }
@@ -1024,8 +1029,8 @@
 
         @media screen and (max-width: 576px) {
             .gift-1, .gift-2 { bottom: 24%; }
-            .gift-1 { animation: slideRotate1Mobile 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
-            .gift-2 { animation: slideRotate2Mobile 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
+            .gift-1 { animation: slideRotate1Mobile 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; }
+            .gift-2 { animation: slideRotate2Mobile 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; }
 
             @keyframes slideRotate1Mobile {
                 from { transform: translateX(-50%) rotate(0deg); opacity: 0; left: 50%; }
@@ -1047,8 +1052,7 @@
             .vinyl-disc { width: 46px; height: 46px; }
             .vinyl-center { width: 12px; height: 12px; }
             .next-btn { width: 34px; height: 34px; }
-            .vinyl-wrapper:hover .next-btn { transform: translateX(-52px) scale(1); }
-            .next-btn:hover { transform: translateX(-52px) scale(1.1) !important; }
+            .vinyl-wrapper:hover .next-btn { transform: translateX(-52px); }
             nav { bottom: 12px; padding: 4px 8px; }
             nav a { width: 32px; height: 32px; }
             .moment-card { border-radius: 20px; }
@@ -1098,7 +1102,7 @@
             </ul>
         </nav>
 
-        <audio id="bg-music">
+        <audio id="bg-music" preload="auto">
             <source src="" type="audio/mpeg">
         </audio>
 
@@ -1147,15 +1151,15 @@
                 <svg class="star star-16" viewBox="0 0 100 100"><path fill="#FFF" d="M50 0 Q50 50 0 50 Q50 50 50 100 Q50 50 100 50 Q50 50 50 0 Z"/></svg>
             </div>
 
-            <div class="first-box" data-aos="zoom-in-up" data-aos-duration="1000">
-                <h1 class="corner-symbol1" data-aos="fade-down" data-aos-delay="200">🍀</h1>
-                <h1 class="corner-symbol2" data-aos="fade-down" data-aos-delay="200">🍀</h1>
+            <div class="first-box" data-aos="zoom-in-up" data-aos-duration="900">
+                <h1 class="corner-symbol1" data-aos="fade-down" data-aos-delay="150">🍀</h1>
+                <h1 class="corner-symbol2" data-aos="fade-down" data-aos-delay="150">🍀</h1>
 
-                <h1 class="title-1" id="home" data-aos="fade-down" data-aos-delay="300"><span class="symbol-1">!</span> Happy Birthday <span class="symbol-1">!</span></h1>
-                <h1 class="title-2" data-aos="fade-up" data-aos-delay="400">Janet Kalyca Putri</h1>
-                <h1 class="line-1" data-aos="zoom-in" data-aos-delay="500">──── ⋆⋅𖤓⋅⋆ ────</h1>
+                <h1 class="title-1" id="home" data-aos="fade-down" data-aos-delay="250"><span class="symbol-1">!</span> Happy Birthday <span class="symbol-1">!</span></h1>
+                <h1 class="title-2" data-aos="fade-up" data-aos-delay="350">Janet Kalyca Putri</h1>
+                <h1 class="line-1" data-aos="zoom-in" data-aos-delay="450">──── ⋆⋅𖤓⋅⋆ ────</h1>
                 <div class="cont-wrapper1">
-                    <div class="desc-1" data-aos="fade-right" data-aos-delay="600">
+                    <div class="desc-1" data-aos="fade-right" data-aos-delay="550">
                         <p class="special-text1">Introducing — "Hapyyy birthh dayyy <span class="additional-text1">Nettt</span>! 💕💕💕 <span class="additional-symbol1">🎉</span>"</p>
                         <p>
                             Selamat ulang tahun yaaa, sii cantikk udahh 15 ajaa nich 🥹, selamat bertambahnya umurrr, semoga kamu sehat selalu, panjang umur sama dilancarkan rezekinya, semogaa kamuu makin sabarr samaa tingkah aneh aku... Hehehe 😅, aku duluu engga nyangka kita bakal sedeket ini, aku mau mengucapkan terimaa kasiih karenaa udahh hadir di hidupkuu, makasihh udahh membuatt hidupkuu sangatt berwarnaa Dann bahagiaa, garaa garaa kamuu akuu jadii lebihh semangatt bangett belajarrr Dann sekolahh, makasihh yaaa. Kamuu orangg yangg palingg spesiall bagiikuu 💕, aku tauu kamuu pekerjaa kerass tapii jangan lupa buat ngasih waktu buat istirahat yaaa, kalauu adaa apa apa jangan lupaa akuu selaluu disinii buat kamuu, i wish you endless happiness, beautiful memories, and the good things life has to offer you, i love you ❤️
@@ -1163,8 +1167,10 @@
                             Love, Noe 💕
                         </p>
                     </div>
-                    <div class="image-1" id="tiltCard" data-aos="fade-left" data-aos-delay="700">
-                        <img src="src/foto1.jpeg" alt="Foto 1">
+                    <div class="image-wrapper" data-aos="fade-left" data-aos-delay="650">
+                        <div class="image-1" id="tiltCard">
+                            <img src="src/foto1.jpeg" alt="Foto 1">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1214,42 +1220,88 @@
         document.addEventListener('DOMContentLoaded', () => {
             'use strict';
 
+            /* INISIALISASI AOS DENGAN THRESHOLD AMAN */
             AOS.init({
                 duration: 800,
                 easing: 'ease-out-cubic',
                 once: true,
-                offset: 80
+                offset: 20
             });
 
-            /* TILT CARD ANIMATION */
+            /* ULTRA-SMOOTH TILT ANIMATION (NO SCALE, NO LAG, FINALLY PERFECT ENTER) */
             const card = document.getElementById('tiltCard');
-            let isHovered = false;
+            let isInteracting = false;
             let rafId = null;
 
-            if (card && window.matchMedia('(hover: hover) and (min-width: 769px)').matches) {
-                card.addEventListener('mouseenter', () => { isHovered = true; });
-
-                card.addEventListener('mousemove', (e) => {
-                    if (!isHovered) return;
+            if (card) {
+                const handleMove = (clientX, clientY) => {
                     if (rafId) cancelAnimationFrame(rafId);
                     
                     rafId = requestAnimationFrame(() => {
                         const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
+                        const x = clientX - rect.left - rect.width / 2;
+                        const y = clientY - rect.top - rect.height / 2;
 
-                        card.style.transform = `perspective(1000px) rotateX(${(-y / 18).toFixed(2)}deg) rotateY(${(x / 18).toFixed(2)}deg) rotateZ(2deg)`;
+                        // Rotasi halus tanpa scale
+                        const rotateX = (-y / 75).toFixed(2);
+                        const rotateY = (x / 75).toFixed(2);
+
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                     });
+                };
+
+                const resetTilt = () => {
+                    isInteracting = false;
+                    if (rafId) cancelAnimationFrame(rafId);
+
+                    card.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                };
+
+                // Mouse Events
+                card.addEventListener('mouseenter', (e) => {
+                    isInteracting = true;
+                    card.style.transition = 'transform 0.25s ease-out';
+                    handleMove(e.clientX, e.clientY);
+                    
+                    setTimeout(() => {
+                        if (isInteracting) {
+                            card.style.transition = 'none';
+                        }
+                    }, 250);
                 });
 
-                card.addEventListener('mouseleave', () => {
-                    isHovered = false;
-                    if (rafId) cancelAnimationFrame(rafId);
-                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
+                card.addEventListener('mousemove', (e) => {
+                    if (!isInteracting) return;
+                    handleMove(e.clientX, e.clientY);
                 });
+
+                card.addEventListener('mouseleave', resetTilt);
+
+                // Touch Events (Mobile/Tablet)
+                card.addEventListener('touchstart', (e) => {
+                    isInteracting = true;
+                    card.style.transition = 'transform 0.25s ease-out';
+                    if (e.touches && e.touches.length > 0) {
+                        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                    setTimeout(() => {
+                        if (isInteracting) card.style.transition = 'none';
+                    }, 250);
+                }, { passive: true });
+
+                card.addEventListener('touchmove', (e) => {
+                    if (!isInteracting) return;
+                    if (e.touches && e.touches.length > 0) {
+                        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: true });
+
+                card.addEventListener('touchend', resetTilt);
+                card.addEventListener('touchcancel', resetTilt);
             }
 
-            /* MUSIC PLAYER & OPENING STATE */
+            /* MUSIC PLAYER & OPENING CONTROLLER */
             const opening = document.getElementById('opening-container');
             const mainContent = document.getElementById('main-section');
             const btnOpening = document.querySelector('.btn-opening');
@@ -1310,6 +1362,7 @@
 
             loadTrack(currentTrack);
 
+            /* TOMBOL READY (BUKA OPENING & PAKSA REFRESH AOS) */
             if (btnOpening) {
                 btnOpening.addEventListener('click', () => {
                     playTrack();
@@ -1323,7 +1376,11 @@
                     setTimeout(() => {
                         document.documentElement.classList.remove('no-scroll');
                         document.body.classList.remove('no-scroll');
-                        if (typeof AOS !== 'undefined') AOS.refresh();
+                        
+                        // FIX PERMANEN AOS: Paksa hitung ulang posisi layout setelah scroll aktif
+                        if (typeof AOS !== 'undefined') {
+                            AOS.refreshHard();
+                        }
                     }, 400);
 
                     setTimeout(() => {
@@ -1352,7 +1409,7 @@
 
             audio.addEventListener('ended', nextTrack);
 
-            /* INTERSECTION OBSERVER FOR DYNAMIC BG & NAV SHADOW */
+            /* DYNAMIC BACKGROUND & NAV SHADOW ON SCROLL */
             const nav = document.querySelector('nav');
             const sections = document.querySelectorAll('section, footer');
 
